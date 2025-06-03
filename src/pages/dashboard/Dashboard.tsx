@@ -1,4 +1,4 @@
-import { FerramentasDaListagem } from "../../shared/components";
+import { FerramentasDeDetalhe } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
 
    
@@ -8,11 +8,9 @@ import { LayoutBaseDePagina } from "../../shared/layouts";
             <LayoutBaseDePagina
              titulo='Página Inicial' 
              barraDeFerramentas={(
-                <FerramentasDaListagem 
-                    mostrarInputBusca
-                    textoBotaoNovo="New"
-                />
-             )}>
+                <FerramentasDeDetalhe/>
+             )}
+             >
                 Testando
             </LayoutBaseDePagina>
         );
