@@ -8,7 +8,7 @@ import { LayoutBaseDePagina } from "../../shared/layouts";
             <LayoutBaseDePagina
              titulo='Página Inicial' 
              barraDeFerramentas={(
-                <FerramentasDeDetalhe/>
+                <FerramentasDeDetalhe mostrarBotaoSalvarEFechar/>
              )}
              >
                 Testando
