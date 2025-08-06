@@ -2,8 +2,9 @@ import { PessoasService } from '../../shared/services/api/pessoas/PessoasService
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LayoutBaseDePagina } from '../../shared/layouts';
+import { VTextField } from '../../shared/forms';
 import { useState, useEffect } from 'react';
-import { LinearProgress } from '@mui/material';
+import { Form } from '@unform/web';
 
 
 export const DetalheDePessoas: React.FC = () => {
@@ -69,11 +70,16 @@ export const DetalheDePessoas: React.FC = () => {
       }
     >
 
-    {isLoading && (
-      <LinearProgress variant='indeterminate' sx={{ width: '100%' }} />
-    )}
+<Form onSubmit={(dados) => console.log(dados)}
+      placeholder={undefined}
+      onPointerEnterCapture={undefined}
+      onPointerLeaveCapture={undefined}
+  >
 
-      <p>DetalheDePessoas {id}</p>
+  <VTextField name="nomeCompleto"/>
+  <button type="submit">Submit</button>
+</Form>
+
     </LayoutBaseDePagina>
   );
 };
