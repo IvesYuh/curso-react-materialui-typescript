@@ -2,14 +2,22 @@ import { PessoasService } from '../../shared/services/api/pessoas/PessoasService
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LayoutBaseDePagina } from '../../shared/layouts';
+import { useState, useEffect, useRef } from 'react';
 import { VTextField } from '../../shared/forms';
-import { useState, useEffect } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
+interface IFormData {
+  nomeCompleto: string;
+  email: string;
+  cidadeId: number;
+}
 
 export const DetalheDePessoas: React.FC = () => {
   const { id = 'nova' } = useParams<'id'>();
   const navigate = useNavigate();
+
+  const formRef = useRef<FormHandles>(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [nome, setNome] = useState('');
@@ -33,8 +41,8 @@ export const DetalheDePessoas: React.FC = () => {
     }
   }, [id]);
 
-  const handleSave = () => {
-    console.log('Save');
+  const handleSave = (dados: IFormData) => {
+    console.log(dados);
   };
   
   const handleDelete = (id: number) => {
@@ -61,24 +69,27 @@ export const DetalheDePessoas: React.FC = () => {
           mostrarBotaoNovo={id !== 'nova'}
           mostrarBotaoApagar={id !== 'nova'}
 
-          aoClicarEmSalvar={handleSave}
-          aoClicarEmApagar={() => handleDelete(Number(id))}
-          aoClicarEmSalvarEFechar={handleSave}
           aoClicarEmVoltar={() => navigate('/pessoas')}
+          aoClicarEmApagar={() => handleDelete(Number(id))}
+          aoClicarEmSalvar={() => formRef.current?.submitForm()}
           aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
+          aoClicarEmSalvarEFechar={() => formRef.current?.submitForm()}
         />
       }
     >
 
-<Form onSubmit={(dados) => console.log(dados)}
-      placeholder={undefined}
-      onPointerEnterCapture={undefined}
-      onPointerLeaveCapture={undefined}
-  >
+      <Form onSubmit={handleSave}
+            ref={formRef}
+            id="form-detalhe-pessoa"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+        >
 
-  <VTextField name="nomeCompleto"/>
-  <button type="submit">Submit</button>
-</Form>
+        <VTextField name="nomeCompleto"/>
+        <VTextField name="email"/>
+        <VTextField name="cidadeId"/>
+      </Form>
 
     </LayoutBaseDePagina>
   );
