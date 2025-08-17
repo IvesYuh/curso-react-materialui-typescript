@@ -122,8 +122,10 @@ export const ListagemDePessoas: React.FC = () => {
                   <Pagination
                     page={pagina}
                     count={Math.ceil(totalCount / Environment.LIMITE_DE_LINHAS)}
+                    
                     onChange={(_, newPage) => setSearchParams({ busca, pagina: newPage.toString() }, { replace: true })}
                   />
+                  
                 </TableCell>
               </TableRow>
             )}

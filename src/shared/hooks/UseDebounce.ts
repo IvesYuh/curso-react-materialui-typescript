@@ -3,7 +3,7 @@ import { useCallback, useRef } from 'react';
 
 export const useDebounce = (delay = 300, notDelayInFirstTime = true) => {
   const isFirstTime = useRef(notDelayInFirstTime);
-  const debouncing = useRef<NodeJS.Timeout | null>(null);
+  const debouncing = useRef<NodeJS.Timeout | undefined>(undefined);
 
 
   const debounce = useCallback((func: () => void) => {

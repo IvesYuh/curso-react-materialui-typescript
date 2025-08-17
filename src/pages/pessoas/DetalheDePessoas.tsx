@@ -1,16 +1,18 @@
-import { PessoasService } from '../../shared/services/api/pessoas/PessoasService';
-import { FerramentasDeDetalhe } from '../../shared/components';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { LayoutBaseDePagina } from '../../shared/layouts';
-import { useState, useEffect, useRef } from 'react';
-import { VTextField } from '../../shared/forms';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
+import { PessoasService } from '../../shared/services/api/pessoas/PessoasService';
+import { FerramentasDeDetalhe } from '../../shared/components';
+import { LayoutBaseDePagina } from '../../shared/layouts';
+import { VTextField } from '../../shared/forms';
+
+
 interface IFormData {
-  nomeCompleto: string;
   email: string;
   cidadeId: number;
+  nomeCompleto: string;
 }
 
 export const DetalheDePessoas: React.FC = () => {
@@ -35,16 +37,41 @@ export const DetalheDePessoas: React.FC = () => {
             navigate('/pessoas');
           } else {
             setNome(result.nomeCompleto);
-            console.log(result);
+            formRef.current?.setData(result);
           }
         });
     }
   }, [id]);
 
+
   const handleSave = (dados: IFormData) => {
-    console.log(dados);
+    setIsLoading(true);
+
+    if (id === 'nova') {
+      PessoasService
+        .create(dados)
+        .then((result) => {
+          setIsLoading(false);
+
+          if (result instanceof Error) {
+            alert(result.message);
+          } else {
+            navigate(`/pessoas/detalhe/${result}`);
+          }
+        });
+    } else {
+      PessoasService
+        .updateById(Number(id), { id: Number(id), ...dados })
+        .then((result) => {
+          setIsLoading(false);
+
+          if (result instanceof Error) {
+            alert(result.message);
+          }
+        });
+    }
   };
-  
+
   const handleDelete = (id: number) => {
     if (confirm('Realmente deseja apagar?')) {
       PessoasService.deleteById(id)
@@ -59,9 +86,10 @@ export const DetalheDePessoas: React.FC = () => {
     }
   };
 
+
   return (
     <LayoutBaseDePagina
-      titulo={id === 'nova' ? 'Nova Pessoa' : nome}
+      titulo={id === 'nova' ? 'Nova pessoa' : nome}
       barraDeFerramentas={
         <FerramentasDeDetalhe
           textoBotaoNovo='Nova'
@@ -77,20 +105,17 @@ export const DetalheDePessoas: React.FC = () => {
         />
       }
     >
-
-      <Form onSubmit={handleSave}
-            ref={formRef}
-            id="form-detalhe-pessoa"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-        >
-
-        <VTextField name="nomeCompleto"/>
-        <VTextField name="email"/>
-        <VTextField name="cidadeId"/>
+      <Form
+        ref={formRef}
+        onSubmit={handleSave}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+        placeholder={""}
+      >
+        <VTextField placeholder='Nome completo' name='nomeCompleto' />
+        <VTextField placeholder='Email' name='email' />
+        <VTextField placeholder='Cidade id' name='cidadeId' />
       </Form>
-
     </LayoutBaseDePagina>
   );
 };
