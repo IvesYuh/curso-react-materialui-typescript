@@ -2,15 +2,9 @@
   "pessoas": [
     {
       "id": 3,
-      "nomeCompleto": "Carlos Silva Pedro",
-      "email": "carlos@gmail.com",
-      "cidadeId": 1
-    },
-    {
-      "id": 4,
       "cidadeId": 1,
-      "email": "pedro@gmail.com",
-      "nomeCompleto": "Pedro Silva"
+      "email": "carlos@gmail.com",
+      "nomeCompleto": "Carlos Silva"
     },
     {
       "id": 5,
@@ -20,15 +14,15 @@
     },
     {
       "id": 6,
-      "cidadeId": 1,
+      "nomeCompleto": "Juca Silva",
       "email": "Juca@gmail.com",
-      "nomeCompleto": "Juca Silva"
+      "cidadeId": 1
     },
     {
       "id": 7,
-      "cidadeId": 1,
+      "nomeCompleto": "Maria Silva",
       "email": "maria@gmail.com",
-      "nomeCompleto": "Maria Silva"
+      "cidadeId": 1
     },
     {
       "id": 8,
@@ -83,6 +77,12 @@
       "cidadeId": 1,
       "email": "alfredo@gmail.com",
       "nomeCompleto": "Alfredo Silva"
+    },
+    {
+      "id": 155,
+      "nomeCompleto": "José de Souza",
+      "email": "jose@gmail.com",
+      "cidadeId": "4"
     }
   ]
 }
