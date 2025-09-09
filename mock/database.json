@@ -84,5 +84,11 @@
       "email": "jose@gmail.com",
       "cidadeId": "4"
     }
+  ],
+  "cidades": [
+    {
+      "nome": "Londrina",
+      "id": 1
+    }
   ]
 }
