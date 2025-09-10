@@ -5,6 +5,7 @@ import * as yup from 'yup';
 
 import { PessoasService } from '../../shared/services/api/pessoas/PessoasService';
 import { VTextField, VForm, useVForm, IVFormErrors } from '../../shared/forms';
+import { AutoCompleteCidade } from './components/AutoCompleteCidade';
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 
@@ -48,8 +49,8 @@ export const DetalheDePessoas: React.FC = () => {
     } else {
       formRef.current?.setData({
         email: '',
-        cidadeId: '',
         nomeCompleto: '',
+        cidadeId: undefined,
       });
     }
   }, [id]);
@@ -185,12 +186,7 @@ export const DetalheDePessoas: React.FC = () => {
 
             <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-                <VTextField
-                  fullWidth
-                  label='Cidade'
-                  name='cidadeId'
-                  disabled={isLoading}
-                />
+                <AutoCompleteCidade isExternalLoading={isLoading} />
               </Grid>
             </Grid>
 

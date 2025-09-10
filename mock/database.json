@@ -62,9 +62,9 @@
     },
     {
       "id": 14,
-      "cidadeId": 1,
+      "nomeCompleto": "Carlos Silva",
       "email": "carlos@gmail.com",
-      "nomeCompleto": "Carlos Silva"
+      "cidadeId": 1
     },
     {
       "id": 154,
