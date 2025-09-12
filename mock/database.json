@@ -8,9 +8,9 @@
     },
     {
       "id": 5,
-      "cidadeId": 1,
+      "nomeCompleto": "Alfredo Silva",
       "email": "alfredo@gmail.com",
-      "nomeCompleto": "Alfredo Silva"
+      "cidadeId": 1
     },
     {
       "id": 6,
@@ -89,6 +89,17 @@
     {
       "nome": "Londrina",
       "id": 1
+    },
+    {
+      "id": 2,
+      "nome": "Maringa"
+    },
+    {
+      "nome": "Curitiba",
+      "id": 3
     }
-  ]
+  ],
+  "auth": {
+    "accessToken": "aaaaaaaaaa.bbbbbbbbbb.cccccccc"
+  }
 }
